@@ -38,9 +38,12 @@ module.exports = (app, io) => {
 												res.status(404).json({error:"User Not Fount"})
 											}
 											if(response.password == password) {
-												const authToken = jwt.sign({email: response.email,name: response.name},'loginTokenNatsaha' )
+												res.status(404).json({error:"Invalid Password"})
+                                            } else {
+                                                const authToken = jwt.sign({email: response.email,name: response.name},'loginTokenNatsaha' )
 												res.status(200).json({success : "Login Success",authToken:authToken});
-											}
+                                            }
+                                        
 										})
 								}
 
