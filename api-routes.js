@@ -15,6 +15,7 @@ module.exports = (app, io) => {
                     res.status(403).json({error:"Email Already Exists",response})
                }
                if(!response){
+                   console.log("wtf",req);
                 const newUser = new Users(req.body)
                 const result = await newUser.save()
                 res.send({data: result,status:"SUCCESS"})
@@ -41,7 +42,7 @@ module.exports = (app, io) => {
 												res.status(404).json({error:"Invalid Password"})
                                             } else {
                                                 const authToken = jwt.sign({email: response.email,name: response.name},'loginTokenNatsaha' )
-												res.status(200).json({success : "Login Success",authToken:authToken});
+												res.status(200).json({success : "Login Success",authToken:authToken, user:response});
                                             }
                                         
 										})
